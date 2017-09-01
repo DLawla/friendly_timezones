@@ -29,4 +29,5 @@ dump.rdb
 
 # Rubymine
 .idea/
+/.idea/
 /.idea/*

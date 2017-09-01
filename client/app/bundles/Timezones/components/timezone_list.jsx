@@ -4,10 +4,15 @@ import Timezone from './timezone';
 
 export default class TimezoneList extends React.Component {
   render() {
+    console.log(this.props.timezones)
     return (
       <div>
-        <Timezone name="Auckland, NZ"/>
-        <Timezone name="Chicago, IL, USA"/>
+        {this.props.timezones.map((timezone, i) => {
+          return(
+              <Timezone key={i} name={timezone.name}/>
+              )
+        })
+        }
       </div>
     );
   }

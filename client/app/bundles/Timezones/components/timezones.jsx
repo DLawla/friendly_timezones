@@ -9,7 +9,7 @@ export default class Timezones extends React.Component {
     super(props);
     this.state = {
       timezone_name: '',
-      timezones: []
+      timezones: [{name: "Auckland, NZ"}, {name: "Rochester, MN"}]
     }
   }
 
