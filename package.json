@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "postinstall": "cd client && yarn install"
+  },
+  "name": "react_on_rails_test",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "bootstrap": "4.0.0-alpha.6"
+  }
+}
