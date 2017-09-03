@@ -1,0 +1,44 @@
+// Place all the styles related to the timezones controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$color-day: #e2e38b
+$color-dusk: #7e4b68
+$color-sunset: #e7a553
+$color-night: #292965
+$color-text-night: #dcdcdc
+
+.timezones
+  padding-top: 4em
+  table
+    width: 100%
+  .timezone
+    padding-top: 1em
+    .timezone-hour
+      text-align: center
+      width: 4.16%
+
+      &.hour-1, &.hour-2, &.hour-3, &.hour-4
+        background-color: $color-night
+        color: $color-text-night
+
+      &.hour-5
+        background-color: $color-dusk
+        color: $color-text-night
+
+      &.hour-6
+        background-color: $color-sunset
+
+      &.hour-7, &.hour-8, &.hour-9, &.hour-10, &.hour-11, &.hour-12, &.hour-13, &.hour-14, &.hour-15, &.hour-16, &.hour-17, &.hour-18, &.hour-19
+        background-color: $color-day
+
+      &.hour-20
+        background-color: $color-sunset
+
+      &.hour-21
+        background-color: $color-dusk
+        color: $color-text-night
+
+      &.hour-22, &.hour-23, &.hour-24, &.hour-0
+        background-color: $color-night
+        color: $color-text-night
