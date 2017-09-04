@@ -7,9 +7,10 @@ export default class Timezone extends React.Component {
     var time_now = moment(new Date());
     var local_time = time_now.tz(this.props.name).format('hh:mm a z');
     var local_time_int = parseInt(time_now.tz(this.props.name).format('hh'));
+
     return (
       <div className="timezone">
-        {this.props.name} : {local_time}
+        {this.props.name} [{this.props.lat}, {this.props.lng}] {local_time}
         <table>
           <tbody>
             <tr>
