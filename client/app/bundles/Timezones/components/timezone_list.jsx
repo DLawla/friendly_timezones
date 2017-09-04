@@ -8,7 +8,7 @@ export default class TimezoneList extends React.Component {
       <div className='timezones'>
         {this.props.timezones.map((timezone, i) => {
           return(
-              <Timezone key={i} name={timezone.name} lat={timezone.lat} lng={timezone.lng}/>
+              <Timezone key={i} name={timezone.name} timezoneId={timezone.timezoneId}/>
               )
         })
         }
