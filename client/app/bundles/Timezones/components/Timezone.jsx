@@ -46,7 +46,11 @@ export default class Timezone extends React.Component {
         <div className={"timezone" + animate_class}>
           <div>
             {this.props.name} [{this.props.timezoneId}] {local_time}
-            <button onClick={this.handleRemoval}>Remove</button>
+            <button onClick={this.handleRemoval}
+                    className="btn btn-removal"
+            >
+            <em className="fa fa-times text-danger"/>
+            </button>
           </div>
 
 

@@ -14,6 +14,7 @@
  *= require bootstrap/dist/css/bootstrap
  *= require bootstrap/dist/css/bootstrap-grid
  *= require animate
+ *= require components-font-awesome/css/font-awesome
 
  *= require_tree .
  *= require_self
