@@ -24,13 +24,13 @@ export default class TimezoneForm extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input
-            id="timezone_name"
-            name="timezone_name"
+            id="name"
+            name="name"
             type="text"
-            value={this.props.input_timezone_name}
+            value={this.props.name}
             onChange={this.handleChange}
           />
-          <input type="submit" value="Select" name="commit" />
+          <input type="submit" value="Select" name="commit" disabled={!this.props.formValid}/>
         </form>
       </div>
     );
