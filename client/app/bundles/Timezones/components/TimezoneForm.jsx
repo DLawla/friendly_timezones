@@ -7,12 +7,12 @@ export default class TimezoneForm extends React.Component {
     this.state = { name: this.props.name };
   }
 
-  handleSubmit (e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.onFormSubmit();
   };
 
-  handleChange (e) {
+  handleChange = (e) => {
     const timezone_name = e.target.name;
     const obj = {};
     obj[timezone_name] = e.target.value;
@@ -22,13 +22,13 @@ export default class TimezoneForm extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+        <form onSubmit={this.handleSubmit}>
           <input
             id="timezone_name"
             name="timezone_name"
             type="text"
             value={this.props.input_timezone_name}
-            onChange={(e) => this.handleChange(e)}
+            onChange={this.handleChange}
           />
           <input type="submit" value="Select" name="commit" />
         </form>

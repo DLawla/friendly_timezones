@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import TimezoneForm from './timezone_form';
-import TimezoneList from './timezone_list';
+import TimezoneForm from './TimezoneForm';
+import TimezoneList from './TimezoneList';
 import update from 'immutability-helper';
 import google_maps from '@google/maps';
 import {getTimezoneId} from '../utils/timezoneid_finder';
@@ -21,7 +21,7 @@ export default class Timezones extends React.Component {
     this.googleMapsClient = google_maps.createClient({key: 'AIzaSyDWHjfjxDM1dn-Hcz2sjr8g24M_plSBrG0'});
   }
 
-  handleFormSubmit (timezone) {
+  handleFormSubmit = (timezone) => {
     // Summary:
     // Get lat lng
     // Get timezone from lat lng
@@ -50,17 +50,17 @@ export default class Timezones extends React.Component {
         console.log(err);
       }
     });
-  }
+  };
 
-  handleUserInput (obj) {
+  handleUserInput = (obj) => {
     this.setState(obj)
-  }
+  };
 
   render() {
     return (
       <div>
-        <TimezoneForm onFormSubmit={() => this.handleFormSubmit()}
-                      onUserInput={(obj) => this.handleUserInput(obj)}
+        <TimezoneForm onFormSubmit={this.handleFormSubmit}
+                      onUserInput={this.handleUserInput}
                       input_timezone_name={this.state.timezone_name}
         />
         <TimezoneList timezones={this.state.timezones}/>

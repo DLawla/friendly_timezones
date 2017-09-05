@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Timezone from './timezone';
+import Timezone from './Timezone';
 
 export default class TimezoneList extends React.Component {
   render() {
