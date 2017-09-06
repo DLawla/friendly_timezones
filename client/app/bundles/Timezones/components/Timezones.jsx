@@ -5,6 +5,7 @@ import TimezoneList from './TimezoneList';
 import update from 'immutability-helper';
 import google_maps from '@google/maps';
 import {getTimezoneId} from '../utils/timezoneid_finder';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
 export default class Timezones extends React.Component {
   constructor(props, _railsContext) {
@@ -31,58 +32,40 @@ export default class Timezones extends React.Component {
     this.setState({name: '', lat: null, lng: null}, this.validateForm)
   }
 
-  handleFormSubmit = (timezone) => {
-    // Summary:
-    // Get lat lng
-    // Get timezone from lat lng
-    // Update State
+  handleFormSubmit = () => {
+    geocodeByAddress(this.state.name)
+        .then(results => getLatLng(results[0]))
+        .then(latLng => this.handleAddingNew(latLng))
+        .catch(error => console.error('Error', error));
+  };
 
-    this.googleMapsClient.geocode({
-      address: this.state.name
-    }, (err, response) => {
-      if (!err) {
-        let lat = response.json.results[0].geometry.location.lat;
-        let lng = response.json.results[0].geometry.location.lng;
-        this.setState({lat: lat, lng: lng, name: response.json.results[0].formatted_address});
+  handleAddingNew = (latLng) => {
+    getTimezoneId(latLng.lat, latLng.lng, (timezoneId) => {
 
-        // If this timezone already exists,
-        // reset the form,
-        // animate the duplicate timezone,
-        // and return early
-
-        var duplicate_found = false;
-        this.state.timezones.map((timezone, i) => {
-          if (timezone.name == this.state.name) {
-            duplicate_found = true;
-            const timezones = this.state.timezones;
-            timezones[i].animate = true;
-            this.setState({timezones: timezones, name: '', lat: null, long: null});
-            this.resetComponent();
-          }
-        });
-
-        if (duplicate_found) {
-          return
-        }
-
-
-        // Get timezone ID and add new timezone component
-        getTimezoneId(lat, lng, (timezoneId) => {
-          const timezones = update(this.state.timezones, { $push: [
-            {name: this.state.name,
-              timezoneId: timezoneId,
-              lat: this.state.lat,
-              lng: this.state.lng,
-            }]});
-          this.setState({timezones: timezones});
+      // If there is a duplicate timezone, animate it and return
+      var duplicate_found = false;
+      this.state.timezones.map((timezone, i) => {
+        if (timezone.timezoneId == this.state.timezoneId) {
+          duplicate_found = true;
+          const timezones = this.state.timezones;
+          timezones[i].animate = true;
+          this.setState({timezones: timezones, name: '', lat: null, long: null});
           this.resetComponent();
-          }
-        );
+        }
+      });
+      if (duplicate_found) {
+        return;
       }
-      else {
-        console.log('Could not find a timezone from that address or city. Error:');
-        console.log(err);
-      }
+
+      // Add new timezone
+      const timezones = update(this.state.timezones, { $push: [
+        {name: this.state.name,
+          timezoneId: timezoneId,
+          lat: this.state.lat,
+          lng: this.state.lng,
+        }]});
+      this.setState({timezones: timezones});
+      this.resetComponent();
     });
   };
 
