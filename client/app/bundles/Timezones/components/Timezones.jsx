@@ -17,6 +17,7 @@ export default class Timezones extends React.Component {
       lng: null,
       formErrors: '',
       formValid: false,
+      loading: false,
       timezones: [{name: "Los_Angeles, CA, US", timezoneId: 'America/Los_Angeles', lat: 12, lng: 13},
         {name: "Tokyo, Japan", timezoneId: 'Asia/Tokyo', lat: 14, lng: 15}]
     };
@@ -33,15 +34,21 @@ export default class Timezones extends React.Component {
   }
 
   handleFormSubmit = () => {
+    this.setState({loading: true});
     geocodeByAddress(this.state.name)
         .then(results => getLatLng(results[0]))
-        .then(latLng => this.handleAddingNew(latLng))
-        .catch(error => console.error('Error', error));
+        .then(latLng => {
+          this.setState({loading: false});
+          this.handleAddingNew(latLng)
+        })
+        .catch(error => {
+          this.setState({loading: false});
+          this.resetComponent();
+        });
   };
 
   handleAddingNew = (latLng) => {
     getTimezoneId(latLng.lat, latLng.lng, (timezoneId) => {
-
       // If there is a duplicate timezone, animate it and return
       var duplicate_found = false;
       this.state.timezones.map((timezone, i) => {
@@ -87,6 +94,7 @@ export default class Timezones extends React.Component {
                       onUserInput={this.handleUserInput}
                       name={this.state.name}
                       formValid={this.state.formValid}
+                      loading={this.state.loading}
         />
         <TimezoneList timezones={this.state.timezones}
                       onRemoval={this.handleRemoval}

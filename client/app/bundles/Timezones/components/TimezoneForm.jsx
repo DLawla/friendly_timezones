@@ -6,7 +6,9 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 export default class TimezoneForm extends React.Component {
   constructor(props, _railsContext) {
     super(props);
-    this.state = { name: this.props.name };
+    this.state = {
+      name: this.props.name,
+    };
   }
 
   handleSubmit = (e) => {
@@ -34,7 +36,7 @@ export default class TimezoneForm extends React.Component {
       autoFocus: true,
     };
     const cssClasses = {
-      input: 'form-control form-control-lg'
+      input: 'form-control form-control-lg ' + (this.props.loading ? 'disabled' : '')
     };
     const AutocompleteItem = ({ formattedSuggestion }) => (
         <div>
@@ -56,7 +58,9 @@ export default class TimezoneForm extends React.Component {
                   onEnterKeyDown={this.handleSelect}
                   autocompleteItem={AutocompleteItem}
                   googleLogo={false}
+                  highlightFirstSuggestion={true}
               />
+              {this.props.loading ? <div><i className="fa fa-spinner fa-spin fa-2x fa-fw loading-spinner" /></div> : null}
               {/*<input type="submit" value="Select" name="commit" disabled={!this.props.formValid}/>*/}
             </div>
           </form>
