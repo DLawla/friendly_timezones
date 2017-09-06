@@ -5,12 +5,33 @@ import { mod } from '../utils/mod';
 export default class Timezone extends React.Component {
   constructor(props, _railsContext) {
     super(props);
+    const time_now = moment(new Date());
     this.state = {
       name: this.props.name,
       timezoneId: this.props.timezoneId,
       animate: this.props.animate,
+      local_time: time_now.tz(this.props.timezoneId),
+      local_time_formatted: time_now.tz(this.props.timezoneId).format('hh:mm:ss a z'),
     };
-    console.log('rendered')
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+        () => this.tick(),
+        1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    const time_now = moment(new Date());
+    this.setState({
+      local_time: time_now.tz(this.props.timezoneId),
+      local_time_formatted: time_now.tz(this.props.timezoneId).format('hh:mm:ss a z'),
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,9 +55,6 @@ export default class Timezone extends React.Component {
   };
 
   render() {
-    const time_now = moment(new Date());
-    const local_time = time_now.tz(this.props.timezoneId).format('hh:mm a z');
-    const local_time_int = parseInt(time_now.tz(this.props.timezoneId).format('hh'));
     let animate_class = '';
 
     if (this.state.animate) {
@@ -46,7 +64,7 @@ export default class Timezone extends React.Component {
     return (
         <div className={"timezone" + animate_class}>
           <div>
-            {this.props.name} [{this.props.timezoneId}] {local_time}
+            {this.state.name} [{this.state.timezoneId}] {this.state.local_time_formatted}
             <button onClick={this.handleRemoval}
                     className="btn btn-removal">
               <em className="fa fa-times text-danger"/>
@@ -57,7 +75,7 @@ export default class Timezone extends React.Component {
             <tbody>
             <tr>
               {[...Array(24)].map((x, i) => {
-                    let time = mod(local_time_int - 12 + i, 24);
+                    let time = mod(this.state.local_time.format('hh') - 12 + i, 24);
                     return (
                         <td key={i} data-time={time} className={"timezone-hour hour-" + time.toString()}>
                           {time}
