@@ -14,12 +14,10 @@ export default class TimezoneList extends React.Component {
       <ReactCSSTransitionGroup
           transitionName={ {
             enter: 'animated-fast',
-            enterActive: 'flipInX',
-            leave: 'animated-fast',
-            leaveActive: 'flipOutX'
+            enterActive: 'flipInX'
           } }
+          transitionLeave={false}
           transitionEnterTimeout={1000}
-          transitionLeaveTimeout={1000}
           className='timezones'>
         {this.props.timezones.map((timezone, i) => {
           return(

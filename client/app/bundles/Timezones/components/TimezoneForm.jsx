@@ -23,20 +23,21 @@ export default class TimezoneForm extends React.Component {
   };
 
   handleSelect = (address, placeId) => {
+    this.handleChange(address)
     this.props.onFormSubmit();
   };
 
   render() {
-
     const inputProps = {
       value: this.props.name,
       onChange: (value) => {this.handleChange(value);},
       type: 'search',
       placeholder: 'Search timezone by city, country or address...',
       autoFocus: true,
+      disabled: this.props.loading
     };
     const cssClasses = {
-      input: 'form-control form-control-lg ' + (this.props.loading ? 'disabled' : '')
+      input: 'form-control form-control-lg'
     };
     const AutocompleteItem = ({ formattedSuggestion }) => (
         <div>

@@ -18,8 +18,10 @@ export default class Timezones extends React.Component {
       formErrors: '',
       formValid: false,
       loading: false,
-      timezones: [{name: "Los_Angeles, CA, US", timezoneId: 'America/Los_Angeles', lat: 12, lng: 13},
-        {name: "Tokyo, Japan", timezoneId: 'Asia/Tokyo', lat: 14, lng: 15}]
+      timezones: [{name: "LosAngeles, CA, US", timezoneId: 'America/Los_Angeles', lat: 12, lng: 13},
+        {name: "Tokyo, Japan", timezoneId: 'Asia/Tokyo', lat: 14, lng: 15},
+        {name: "Auckland, New Zealand", timezoneId: 'Pacific/Auckland', lat: 14, lng: 15},
+      ]
     };
     // Init google maps client
     this.googleMapsClient = google_maps.createClient({key: 'AIzaSyDWHjfjxDM1dn-Hcz2sjr8g24M_plSBrG0'});

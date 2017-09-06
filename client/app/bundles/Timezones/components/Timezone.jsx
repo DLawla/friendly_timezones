@@ -14,6 +14,7 @@ export default class Timezone extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    this.setState(nextProps);
     if (!this.props.animate && nextProps.animate){
       this.handleAnimate(nextProps)
     }
@@ -47,12 +48,10 @@ export default class Timezone extends React.Component {
           <div>
             {this.props.name} [{this.props.timezoneId}] {local_time}
             <button onClick={this.handleRemoval}
-                    className="btn btn-removal"
-            >
-            <em className="fa fa-times text-danger"/>
+                    className="btn btn-removal">
+              <em className="fa fa-times text-danger"/>
             </button>
           </div>
-
 
           <table>
             <tbody>
