@@ -24,7 +24,7 @@ export default class TimezoneList extends React.Component {
               <Timezone key={i}
                         name={timezone.name}
                         timezoneId={timezone.timezoneId}
-                        animate={timezone.animate}
+                        duplicate_found={timezone.duplicate_found}
                         onRemoval={this.handleRemoval}
               />
               )

@@ -9,7 +9,7 @@ export default class Timezone extends React.Component {
     this.state = {
       name: this.props.name,
       timezoneId: this.props.timezoneId,
-      animate: this.props.animate,
+      animate: false,
       local_time: time_now.tz(this.props.timezoneId),
       local_time_formatted: time_now.tz(this.props.timezoneId).format('hh:mm:ss a z'),
     };
@@ -36,13 +36,14 @@ export default class Timezone extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState(nextProps);
-    if (!this.props.animate && nextProps.animate){
-      this.handleAnimate(nextProps)
+
+    if (!this.props.duplicate_found && nextProps.duplicate_found){
+      this.handleAnimate();
     }
   }
 
-  handleAnimate(nextProps) {
-    this.setState({animate: nextProps.animate});
+  handleAnimate() {
+    this.setState({animate: true});
     setTimeout(() => {
       this.setState({animate: false})
     }, 1000);

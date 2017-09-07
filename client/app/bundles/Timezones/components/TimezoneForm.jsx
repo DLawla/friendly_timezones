@@ -34,7 +34,8 @@ export default class TimezoneForm extends React.Component {
       type: 'search',
       placeholder: 'Search timezone by city, country or address...',
       autoFocus: true,
-      disabled: this.props.loading
+      disabled: this.props.loading,
+      ref: (input) => { input && input.focus() }
     };
     const cssClasses = {
       input: 'form-control form-control-lg'

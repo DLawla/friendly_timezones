@@ -54,14 +54,16 @@ export default class Timezones extends React.Component {
       // If there is a duplicate timezone, animate it and return
       var duplicate_found = false;
       this.state.timezones.map((timezone, i) => {
-        if (timezone.timezoneId == this.state.timezoneId) {
+        if (timezone.timezoneId === timezoneId) {
+          console.log('in here');
           duplicate_found = true;
           const timezones = this.state.timezones;
-          timezones[i].animate = true;
+          timezones[i].duplicate_found = true;
           this.setState({timezones: timezones, name: '', lat: null, long: null});
           this.resetComponent();
         }
       });
+
       if (duplicate_found) {
         return;
       }
