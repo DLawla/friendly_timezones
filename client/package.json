@@ -30,6 +30,7 @@
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.6.0",
     "react-dom": "^15.5.4",
+    "react-geolocated": "^2.0.0",
     "react-on-rails": "8.0.0",
     "react-places-autocomplete": "^5.4.3",
     "webpack": "^2.3.3",

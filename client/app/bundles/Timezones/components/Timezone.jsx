@@ -62,27 +62,40 @@ export default class Timezone extends React.Component {
       animate_class = ' animated shake';
     }
 
+    const local_time_hour = this.state.local_time.format('hh')
+
     return (
         <div className={"timezone" + animate_class}>
-          <div>
-            {this.state.name} [{this.state.timezoneId}] {this.state.local_time_formatted}
-            <button onClick={this.handleRemoval}
-                    className="btn btn-removal">
-              <em className="fa fa-times text-danger"/>
-            </button>
+          <div className="text-center">
+            <div className="d-inline timezone-components">
+              <div className="timezone-component-left text-muted">
+                {this.state.name} [{this.state.timezoneId}]
+              </div>
+              <h4 className="timezone-component-center text-primary">
+                {this.state.local_time_formatted}
+              </h4>
+              <div className="timezone-component-right">
+                <button onClick={this.handleRemoval}
+                        className="btn btn-removal">
+                  <em className="fa fa-times text-danger"/>
+                </button>
+              </div>
+            </div>
           </div>
-
           <table>
             <tbody>
             <tr>
               {[...Array(24)].map((x, i) => {
-                    let time = mod(this.state.local_time.format('hh') - 12 + i, 24);
-                    return (
-                        <td key={i} data-time={time} className={"timezone-hour hour-" + time.toString()}>
-                          {time}
-                        </td>
-                    )
-                  }
+                let time = mod(local_time_hour - 12 + i, 24);
+                let half_size = (i == 0)
+                return (
+                    <td key={i}
+                        data-time={time}
+                        className={"timezone-hour hour-" + time.toString() + (half_size ? ' half' : '') + (i == 12 ? ' current' : '')}>
+                      {half_size ? '' : time}
+                    </td>
+                )
+                }
               )}
             </tr>
             </tbody>

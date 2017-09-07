@@ -11,20 +11,18 @@ export default class TimezoneForm extends React.Component {
     };
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.onFormSubmit();
-  };
-
   handleChange = (value) => {
+    console.log('change!');
+    console.log(value);
     const obj = {};
     obj['name'] = value;
     this.props.onUserInput(obj);
   };
 
   handleSelect = (address, placeId) => {
-    this.handleChange(address)
-    this.props.onFormSubmit();
+    console.log('submit!');
+    this.handleChange(address);
+    this.props.onFormSubmit(address);
   };
 
   render() {
@@ -51,7 +49,7 @@ export default class TimezoneForm extends React.Component {
     return (
       <div className="row">
         <div className="offset-sm-3 col-sm-6">
-          <form onSubmit={this.handleSubmit}>
+          <form>
             <div className="form-group">
               <PlacesAutocomplete
                   inputProps={inputProps}

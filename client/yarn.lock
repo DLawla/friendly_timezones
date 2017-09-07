@@ -2246,6 +2246,12 @@ react-dom@^15.5.4:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
+react-geolocated@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-geolocated/-/react-geolocated-2.0.0.tgz#77fc90818c66f80172c0028269f063494f504ae7"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-on-rails@8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/react-on-rails/-/react-on-rails-8.0.0.tgz#97fda265cdc5e4cd4334ae7a7f2bacd85346161e"
