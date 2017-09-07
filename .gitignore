@@ -23,7 +23,7 @@ node_modules
 
 # Generated js bundles
 /public/webpack/*
-public/webpack/*
+/public/webpack/development/manifest.json
 
 # Redis file
 dump.rdb
