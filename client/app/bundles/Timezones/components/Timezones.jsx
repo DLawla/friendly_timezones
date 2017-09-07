@@ -20,8 +20,7 @@ export default class Timezones extends React.Component {
       formErrors: '',
       formValid: false,
       loading: false,
-      timezones: [{name: "LosAngeles, CA, US", timezoneId: 'America/Los_Angeles', lat: 12, lng: 13},
-        {name: "Tokyo, Japan", timezoneId: 'Asia/Tokyo', lat: 14, lng: 15},
+      timezones: [{name: "Geneva, Switzerland", timezoneId: 'Europe/Zurich', lat: 14, lng: 15},
         {name: "Auckland, New Zealand", timezoneId: 'Pacific/Auckland', lat: 14, lng: 15},
       ]
     };

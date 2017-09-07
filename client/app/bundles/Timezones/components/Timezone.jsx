@@ -62,7 +62,7 @@ export default class Timezone extends React.Component {
       animate_class = ' animated shake';
     }
 
-    const local_time_hour = this.state.local_time.format('hh')
+    const local_time_hour = this.state.local_time.format('HH');
 
     return (
         <div className={"timezone" + animate_class}>
